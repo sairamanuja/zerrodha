@@ -1,0 +1,1704 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.dashboard-container {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.content {
+  flex-basis: 68%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 3% 2%;
+}
+
+.funds {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.funds p {
+  font-size: 0.8rem;
+  color: rgb(179, 179, 179);
+  margin-right: 8px;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 2px;
+  color: #fff;
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.btn-green {
+  background: #4caf50;
+}
+
+.btn-blue {
+  background: #4184f3;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 5%;
+}
+
+.col {
+  flex-basis: 48%;
+  text-align: left;
+}
+
+.col span {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.section-icon {
+  transform: scale(0.8);
+  color: rgb(66, 56, 56);
+  padding: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.col span p {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.table {
+  border: 1px solid #ddd;
+  padding: 5% 8%;
+}
+
+.table .data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table .data > * {
+  margin-bottom: 5%;
+}
+
+.table .data p:first-child {
+  font-size: 1rem;
+  color: rgb(151, 151, 151);
+}
+
+.imp {
+  font-size: 1.5rem;
+  color: #313131;
+}
+
+.colored {
+  color: #4184f3;
+}
+
+.table hr {
+  border: none;
+  background: #d1d1d1;
+  height: 0.5px;
+  margin-bottom: 5%;
+}
+
+.commodity {
+  padding: 2% 8%;
+  text-align: center;
+}
+
+.commodity p {
+  margin-bottom: 10%;
+  color: #c9c9c9;
+}
+
+/* sudo selectors */
+.btn-blue:hover {
+  background: #74a7fa;
+}
+
+.btn-green:hover {
+  background: #7bdd7f;
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: rgb(71, 71, 71);
+  margin-bottom: 2%;
+}
+
+.order-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table tr {
+  border-top: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.order-table th {
+  text-align: right;
+  padding: 15px 10px;
+  color: rgb(145, 145, 145);
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.order-table tr th:first-child,
+.order-table tr td:first-child {
+  text-align: left;
+}
+
+.order-table tr th:nth-child(1),
+.order-table tr th:nth-child(4) {
+  border-right: 1px solid #f1f1f1;
+}
+
+.order-table tr td:nth-child(1),
+.order-table tr td:nth-child(4) {
+  border-right: 1px solid #f1f1f1;
+}
+
+.order-table tr td:last-child {
+  font-size: 0.6rem;
+}
+
+.order-table td {
+  padding: 10px 10px;
+  text-align: right;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: rgb(73, 73, 73);
+}
+
+.align-left {
+  text-align: left;
+}
+
+.order-table td.profit {
+  color: rgb(72, 194, 55);
+}
+
+.order-table td.loss {
+  color: rgb(250, 118, 78);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.col {
+  flex-basis: 33%;
+}
+
+.col h5 {
+  font-size: 1.8rem;
+  color: rgb(71, 71, 71);
+  font-weight: 300;
+}
+
+.col h5 span {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.col p {
+  font-size: 0.8rem;
+  color: rgb(153, 153, 153);
+  font-weight: 300;
+  margin-top: 2%;
+}
+
+.row .col:last-child h5 {
+  color: rgb(72, 194, 55);
+}
+
+/* sudo selector */
+.item:hover {
+  cursor: pointer;
+}
+
+.menu-container {
+  flex-basis: 68%;
+  height: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 30px;
+  height: 20px;
+}
+
+.menus {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.menus ul {
+  list-style-type: none;
+}
+
+.menus li {
+  display: inline-block;
+  margin-right: 30px;
+  text-decoration: none;
+}
+
+.menu {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgb(70, 70, 70);
+}
+
+.menu.selected {
+  color: rgb(245, 104, 52);
+}
+
+hr {
+  border-left: 0.8px solid rgb(243, 242, 242);
+  height: 30px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 20px;
+}
+
+.profile .avatar {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: rgb(221, 139, 221);
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  display: flex;
+  background: rgb(252, 229, 252);
+  margin-right: 8px;
+}
+
+.profile .username {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+/* sudo selectors */
+
+.menu:hover {
+  color: rgb(245, 104, 52);
+}
+
+.profile:hover {
+  cursor: pointer;
+}
+
+.profile:hover .username {
+  cursor: pointer;
+  color: rgb(223, 91, 43);
+}
+
+.orders {
+  width: 100%;
+  height: 90vh;
+}
+
+.no-orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-orders .icon {
+  transform: scale(4);
+  color: rgb(173, 173, 173);
+  display: block;
+}
+
+.no-orders p {
+  margin-top: 6%;
+  color: rgb(173, 173, 173);
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.btn {
+  text-decoration: none;
+  background: rgb(77, 77, 248);
+  padding: 10px 20px;
+  border-radius: 2px;
+  color: #fff;
+  margin-top: 2%;
+}
+
+.btn:hover {
+  background: rgb(110, 110, 253);
+}
+
+.title {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: rgb(71, 71, 71);
+  margin-bottom: 2%;
+}
+
+.order-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table tr {
+  border-top: 1px solid rgb(211, 211, 211);
+  border-bottom: 1px solid rgb(211, 211, 211);
+}
+
+.order-table th {
+  text-align: right;
+  padding: 15px 10px;
+  color: rgb(145, 145, 145);
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.order-table tr th:first-child,
+.order-table tr td:first-child {
+  text-align: left;
+}
+
+.order-table tr td:first-child p {
+    background: rgb(255, 197, 197);
+    color: rgb(233, 120, 120);
+    width: 50%;
+    text-align: center;
+    border-radius: 2px;
+}
+
+.order-table tr td:last-child {
+  font-size: 0.6rem;
+}
+
+.order-table td {
+  padding: 10px 10px;
+  text-align: right;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: rgb(73, 73, 73);
+}
+
+.align-left {
+  text-align: left;
+}
+
+.order-table td.profit {
+  color: rgb(72, 194, 55);
+}
+
+.order-table td.loss {
+  color: rgb(250, 118, 78);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5%;
+}
+
+.col {
+  flex-basis: 33%;
+}
+
+.col h5 {
+  font-size: 1.8rem;
+  color: rgb(71, 71, 71);
+  font-weight: 300;
+}
+
+.col h5 span {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+.col p {
+  font-size: 0.8rem;
+  color: rgb(153, 153, 153);
+  font-weight: 300;
+  margin-top: 2%;
+}
+
+.row .col:last-child h5 {
+  color: rgb(72, 194, 55);
+}
+
+/* sudo selector */
+.item:hover {
+  cursor: pointer;
+}
+
+.username h6 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(83, 83, 83);
+  margin-bottom: 20px;
+}
+
+.divider {
+  border: none;
+  background: #d1d1d1;
+  height: 1px;
+  margin: 20px 0;
+  margin-bottom: 5%;
+}
+
+.section {
+  padding-bottom: 2%;
+}
+
+.section span {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2%;
+}
+
+.section span p {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.section-icon {
+  transform: scale(0.8);
+  color: rgb(112, 112, 112);
+  padding: 0;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.data {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.data .first h3 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: rgb(71, 71, 71);
+}
+
+.data .first p {
+  font-size: 0.8rem;
+  color: rgb(136, 136, 136);
+}
+
+.data .first small {
+  font-size: 0.8rem;
+  color: rgb(72, 194, 55);
+}
+
+.data .first .profit {
+  color: rgb(72, 194, 55);
+}
+
+.data hr {
+  border-left: 0.6px solid rgb(243, 242, 242);
+  height: 70px;
+}
+
+.data .second p {
+  font-size: 0.8rem;
+  color: rgb(136, 136, 136);
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.data .second p span {
+  display: inline;
+  margin-left: 5%;
+  font-size: 0.9rem;
+  color: rgb(100, 100, 100);
+}
+
+.section hr {
+  margin-top: 6%;
+}
+
+.topbar-container {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 4px 2px rgb(236, 235, 235);
+  box-sizing: border-box;
+  z-index: 9;
+}
+
+.indices-container {
+  flex-basis: 32%;
+  height: 100%;
+  padding: 10px 20px;
+  border-right: 1px solid rgb(224, 224, 224);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nifty {
+  flex-basis: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: -2;
+}
+
+.sensex {
+  flex-basis: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.nifty > *,
+.sensex > * {
+  margin-right: 8px;
+}
+
+.index {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgb(97, 97, 97);
+  white-space: nowrap;
+}
+
+.index-points {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgb(223, 73, 73);
+}
+
+.percent {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgb(146, 146, 146);
+}
+
+/* sudo selectors */
+.index:hover {
+  cursor: pointer;
+}
+
+.watchlist-container {
+  flex-basis: 32%;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 4px 1px rgb(236, 235, 235);
+  overflow-y: auto;
+  position: relative;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.search {
+  width: 100%;
+  height: 6%;
+  border: none;
+  padding: 15px 20px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgb(241, 241, 241);
+  border-bottom: 0.8px solid rgb(235, 234, 234);
+}
+
+.counts {
+  position: absolute;
+  right: 20px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgb(177, 177, 177);
+}
+
+.list {
+  list-style-type: none;
+  padding-bottom: 12%;
+}
+
+.list li {
+  border-bottom: 0.8px solid rgb(235, 234, 234);
+  padding: 12px 10px 12px 14px;
+  position: relative;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 300;
+  font-size: 0.8rem;
+  position: relative;
+}
+
+.item-info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.item-info > * {
+  margin-right: 8px;
+}
+
+.item-info span:nth-child(1) {
+  color: rgb(141, 141, 141);
+  flex: 1;
+}
+
+.item-info span:nth-child(2) {
+  color: rgb(223, 73, 73);
+  margin-right: 12px;
+  flex: 2;
+}
+
+.item-info span:nth-child(3) {
+  color: rgb(223, 73, 73);
+  flex: 1;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  display: none;
+}
+
+.actions span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actions span button {
+  height: 30px;
+  min-width: 36px;
+  padding: 0 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Icons sit perfectly centred inside their buttons */
+.actions span button .icon {
+  transform: scale(0.8);
+  margin: 0;
+}
+
+.buy {
+  background-color: #4184f3;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.8rem;
+  border: 0.7px solid #4184f3;
+}
+
+.sell {
+  background-color: #ff5722;
+  color: #fff;
+  font-weight: 400;
+  font-size: 0.8rem;
+  border: 0.7px solid #ff5722;
+}
+
+.action {
+  background-color: #fff;
+  border: 0.7px solid #9b9b9b;
+}
+
+.icon {
+  transform: scale(0.7);
+  color: rgb(65, 65, 65);
+}
+
+.watchlist-number {
+  height: 6%;
+  width: 32%;
+  box-sizing: border-box;
+  position: fixed;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 1px;
+  padding: 20px 20px 20px 0;
+  left: 0;
+  border: 1px solid rgb(231, 231, 231);
+  z-index: 5;
+  background: #fff;
+}
+
+.watchlist-number ul {
+  list-style-type: none;
+}
+
+.watchlist-number ul li {
+  display: inline-block;
+  padding: 10px 20px;
+  border-right: 1px solid rgb(231, 231, 231);
+}
+
+.watchlist-number ul li:nth-child(1) {
+  color: rgb(223, 73, 73);
+}
+
+.down {
+  color: rgb(223, 73, 73);
+}
+
+.up {
+  color: rgb(103, 201, 136);
+}
+
+.settings {
+  transform: scale(0.8);
+  color: rgb(105, 105, 105);
+}
+
+/* sudo selectors */
+.search:focus {
+  outline: none;
+}
+
+.list li:hover {
+  cursor: move;
+  background-color: #f3f3f3;
+}
+
+.list li:hover > .actions {
+  display: flex;
+  cursor: move;
+}
+
+/* TODO */
+.list li::before {
+  content: "";
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.watchlist-number ul li:hover {
+  color: rgb(245, 104, 52);
+  cursor: pointer;
+  background: rgb(243, 243, 243);
+}
+
+.settings:hover {
+  cursor: pointer;
+}
+
+.action:hover {
+  background-color: rgb(212, 212, 212);
+}
+
+/* Reveal row actions on hover (desktop) or when a row is tapped (mobile) */
+.list li.active > .actions {
+  display: flex;
+}
+
+/* On desktop, the action buttons replace the price/percent — hide the
+   item info so the two don't overlap. */
+@media (min-width: 769px) {
+  .list li:hover .itemInfo,
+  .list li.active .itemInfo {
+    visibility: hidden;
+  }
+}
+
+/* Give the action bar an opaque backdrop so nothing shows through behind it,
+   and keep the buttons clear of the right edge / scrollbar. */
+.actions {
+  background: transparent;
+  padding-right: 14px;
+  box-sizing: border-box;
+}
+
+.list li:hover .actions,
+.list li.active .actions {
+  background: linear-gradient(
+    to right,
+    rgba(243, 243, 243, 0) 0%,
+    #f3f3f3 20%
+  );
+}
+
+.actions span button:last-child {
+  margin-right: 0;
+}
+
+/* ---- Positions / Holdings P&L summary colouring ---- */
+.row .col h5.profit {
+  color: rgb(72, 194, 55);
+}
+
+.row .col h5.loss {
+  color: rgb(250, 118, 78);
+}
+
+/* Override the legacy "last col is always green" rule */
+.row .col:last-child h5.profit {
+  color: rgb(72, 194, 55);
+}
+
+.row .col:last-child h5.loss {
+  color: rgb(250, 118, 78);
+}
+
+/* Product chip (CNC / MIS / NRML) in the positions table */
+.product-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgb(238, 242, 255);
+  color: rgb(82, 110, 209);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Loading / empty / error states */
+.positions-state {
+  padding: 6% 2%;
+}
+
+.positions-state p {
+  font-size: 1rem;
+  color: rgb(120, 120, 120);
+}
+
+.positions-state.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.positions-state.empty p {
+  color: rgb(90, 90, 90);
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.positions-state.empty span {
+  color: rgb(160, 160, 160);
+  font-size: 0.85rem;
+}
+
+/* Subtle row hover for data tables */
+.order-table tbody tr:hover {
+  background: rgb(250, 250, 250);
+}
+
+/* ============================================================
+   Apps page
+   ============================================================ */
+.apps-page {
+  max-width: 1000px;
+}
+
+.apps-head {
+  margin-bottom: 24px;
+}
+
+.apps-head p {
+  margin: 6px 0 0;
+  color: #8a8a8a;
+  font-size: 0.92rem;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.app-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  border: 1px solid #eef0f2;
+  border-radius: 10px;
+  padding: 18px;
+  background: #fff;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.05s;
+}
+
+.app-card:hover {
+  border-color: #dfe3e8;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.app-icon {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* When a real brand logo loads, show it on a clean white tile */
+.app-icon.logo {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  overflow: hidden;
+}
+
+.app-icon.logo img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.app-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-name-row h4 {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #3c3c3c;
+}
+
+.app-badge {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: #21ba45;
+  background: #e7f7ec;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.app-tag {
+  display: block;
+  font-size: 0.74rem;
+  color: #a0a4ab;
+  margin: 2px 0 8px;
+}
+
+.app-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.app-btn {
+  flex: 0 0 auto;
+  align-self: center;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.app-btn.open {
+  background: #eef4fc;
+  color: #387ed1;
+}
+
+.app-btn.open:hover {
+  background: #ddeafa;
+}
+
+.app-btn.connect {
+  background: #387ed1;
+  color: #fff;
+}
+
+.app-btn.connect:hover {
+  background: #2f6cb5;
+}
+
+@media (max-width: 768px) {
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-card {
+    flex-wrap: wrap;
+  }
+
+  .app-btn {
+    width: 100%;
+    margin-top: 4px;
+  }
+}
+
+/* ============================================================
+   Summary / dashboard home (Zerodha-style)
+   ============================================================ */
+.summary-page {
+  max-width: 900px;
+}
+
+.summary-greeting {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #4b4b4b;
+  margin: 4px 0 0;
+}
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid #eef0f2;
+  height: 0;
+  margin: 18px 0;
+}
+
+.summary-block {
+  padding: 4px 0;
+}
+
+.summary-label {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #9b9b9b;
+  margin: 0 0 18px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.summary-figure {
+  min-width: 200px;
+}
+
+.summary-figure h3 {
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: #4b4b4b;
+  margin: 0 0 4px;
+  line-height: 1.1;
+}
+
+.summary-figure h3.profit {
+  color: rgb(72, 194, 55);
+}
+
+.summary-figure h3 small {
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.summary-figure span {
+  font-size: 0.82rem;
+  color: #9aa0a6;
+}
+
+.summary-meta {
+  padding-left: 40px;
+  border-left: 1px solid #eef0f2;
+}
+
+.summary-meta p {
+  font-size: 0.88rem;
+  color: #8a8a8a;
+  margin: 0 0 12px;
+  white-space: nowrap;
+}
+
+.summary-meta p:last-child {
+  margin-bottom: 0;
+}
+
+.summary-meta p span {
+  color: #4b4b4b;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .summary-row {
+    gap: 20px;
+  }
+
+  .summary-figure {
+    min-width: 0;
+  }
+
+  .summary-figure h3 {
+    font-size: 2rem;
+  }
+
+  .summary-meta {
+    padding-left: 0;
+    border-left: none;
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   Funds page (Zerodha-style)
+   ============================================================ */
+.funds-page {
+  max-width: 980px;
+}
+
+.funds-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0 22px;
+  border-bottom: 1px solid #eef0f2;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.funds-bar p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #6b7280;
+}
+
+.funds-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.funds-btn {
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.funds-btn.add {
+  background: #4caf50;
+}
+
+.funds-btn.add:hover {
+  background: #429a46;
+}
+
+.funds-btn.withdraw {
+  background: #4184f3;
+}
+
+.funds-btn.withdraw:hover {
+  background: #356fd0;
+}
+
+.funds-btn.open {
+  background: #4184f3;
+  display: inline-block;
+  margin-top: 16px;
+}
+
+.funds-btn.open:hover {
+  background: #356fd0;
+}
+
+.funds-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.funds-card {
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.funds-card-head {
+  padding: 16px 22px;
+  border-bottom: 1px solid #f2f3f5;
+}
+
+.funds-card-head h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #444;
+}
+
+/* Three highlighted figures */
+.funds-highlight {
+  display: flex;
+  padding: 22px;
+  gap: 18px;
+}
+
+.hl-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 16px;
+  border-right: 1px solid #f2f3f5;
+}
+
+.hl-item:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.hl-value {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #3c3c3c;
+}
+
+.hl-value.primary {
+  color: #4184f3;
+}
+
+.hl-label {
+  font-size: 0.78rem;
+  color: #9aa0a6;
+}
+
+/* Detail rows */
+.funds-detail {
+  padding: 6px 22px 22px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.detail-row span:last-child {
+  color: #3c3c3c;
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-divider {
+  height: 1px;
+  background: #f2f3f5;
+  margin: 8px 0;
+}
+
+.detail-row.total {
+  font-weight: 600;
+}
+
+.detail-row.total span {
+  color: #3c3c3c;
+}
+
+/* Commodity empty card */
+.commodity-card {
+  padding: 40px 28px;
+}
+
+.commodity-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.commodity-empty p {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+.commodity-empty span {
+  font-size: 0.84rem;
+  color: #9aa0a6;
+}
+
+@media (max-width: 900px) {
+  .funds-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .funds-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .funds-actions {
+    width: 100%;
+  }
+
+  .funds-btn.add,
+  .funds-btn.withdraw {
+    flex: 1;
+    text-align: center;
+  }
+
+  .funds-highlight {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hl-item {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid #f2f3f5;
+    padding-bottom: 12px;
+  }
+
+  .hl-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Align the watchlist item info row */
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.itemInfo .price {
+  font-weight: 500;
+  color: rgb(73, 73, 73);
+}
+
+/* ============================================================
+   New responsive controls — hidden on desktop by default
+   ============================================================ */
+.nav-toggle,
+.watchlist-fab,
+.wl-close,
+.wl-overlay {
+  display: none;
+}
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(70, 70, 70);
+  padding: 6px;
+}
+
+/* Horizontal scroll safety for wide tables on small screens */
+.order-table {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================
+   Tablet / mobile
+   ============================================================ */
+@media (max-width: 768px) {
+  /* ---- Top bar ---- */
+  .topbar-container {
+    height: auto;
+    min-height: 56px;
+    position: sticky;
+    top: 0;
+    background: #fff;
+  }
+
+  .indices-container {
+    flex-basis: auto;
+    flex: 1;
+    padding: 8px 14px;
+    justify-content: flex-start;
+    gap: 18px;
+    overflow-x: auto;
+  }
+
+  .nifty,
+  .sensex {
+    flex-basis: auto;
+    gap: 6px;
+  }
+
+  .menu-container {
+    flex-basis: auto;
+    padding: 8px 14px;
+    justify-content: flex-end;
+    gap: 10px;
+    position: relative;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Collapse the nav into a dropdown */
+  .menus {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 220px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 0;
+    z-index: 1100;
+  }
+
+  .menus.open {
+    display: flex;
+  }
+
+  .menus ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  .menus li {
+    display: block;
+    margin: 0;
+  }
+
+  .menus li .menu {
+    padding: 12px 18px;
+    font-size: 0.95rem;
+  }
+
+  .menus li .menu.selected {
+    background: rgb(255, 244, 240);
+  }
+
+  .menus hr {
+    height: auto;
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 6px 0;
+  }
+
+  .menus .profile {
+    margin: 6px 18px;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  /* ---- Body layout: content full width, watchlist becomes a drawer ---- */
+  .dashboard-container {
+    height: auto;
+    min-height: 90vh;
+    align-items: stretch;
+  }
+
+  .content {
+    flex-basis: 100%;
+    width: 100%;
+    padding: 18px 16px 90px;
+    height: auto;
+  }
+
+  .watchlist-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 86%;
+    max-width: 360px;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 1200;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .watchlist-container.open {
+    transform: translateX(0);
+  }
+
+  .wl-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1150;
+  }
+
+  .wl-close {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #777;
+    padding: 6px;
+    margin-right: 6px;
+  }
+
+  /* ---- Floating watchlist toggle ---- */
+  .watchlist-fab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    background: rgb(245, 104, 52);
+    color: #fff;
+    border: none;
+    border-radius: 28px;
+    padding: 12px 18px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 6px 18px rgba(245, 104, 52, 0.4);
+    cursor: pointer;
+    z-index: 1100;
+  }
+
+  /* On mobile, always show buy/sell actions inline (no hover) */
+  .actions {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  /* Keep wide tables readable via horizontal scroll */
+  .order-table table {
+    min-width: 560px;
+  }
+
+  /* Summary / funds widgets stack */
+  .data {
+    width: 100%;
+  }
+
+  .funds {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .table {
+    padding: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .indices-container {
+    gap: 12px;
+  }
+
+  .index,
+  .index-points,
+  .percent {
+    font-size: 0.72rem;
+  }
+
+  .content {
+    padding: 14px 12px 90px;
+  }
+
+  .col h5 {
+    font-size: 1.5rem;
+  }
+
+  .data .first h3 {
+    font-size: 2rem;
+  }
+}
+
+
+

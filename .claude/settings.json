@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(command -v docker)",
+      "Bash(docker info *)",
+      "Bash(command -v mongosh)",
+      "Bash(docker rm *)",
+      "Bash(docker run *)",
+      "Bash(docker exec *)",
+      "Bash(npm start *)",
+      "Bash(PORT=3000 BROWSER=none npm start)",
+      "Bash(PORT=3001 BROWSER=none npm start)",
+      "Bash(curl -s http://localhost:8080/allHoldings)",
+      "Bash(echo \"Holdings: $\\(curl -s http://localhost:8080/allHoldings\\)\")",
+      "Bash(curl -s http://localhost:8080/allPositions)",
+      "Bash(echo \"Positions: $\\(curl -s http://localhost:8080/allPositions\\)\")",
+      "Bash(curl -s http://localhost:8080/allOrders)",
+      "Bash(echo \"Holdings count: $\\(curl -s http://localhost:8080/allHoldings)",
+      "Bash(curl -s -X POST http://localhost:8080/newOrder -H 'Content-Type: application/json' -d '{\"name\":\"INFY\",\"qty\":1,\"price\":1555.45,\"mode\":\"BUY\"}')",
+      "Bash(curl -fsSL --max-time 15 \"https://www.google.com/s2/favicons?sz=128&domain=zerodha.com\" -o kite.png)",
+      "Bash(curl -s -o /dev/null -w '%{http_code} %{content_type}' http://localhost:3000/logo.png)",
+      "Bash(echo \"logo.png:        $\\(curl -s -o /dev/null -w '%{http_code} %{content_type}' http://localhost:3000/logo.png\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code} %{content_type}' http://localhost:3000/apps/kite.png)",
+      "Bash(echo \"apps/kite.png:   $\\(curl -s -o /dev/null -w '%{http_code} %{content_type}' http://localhost:3000/apps/kite.png\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code} %{content_type}' http://localhost:3000/apps/coin.png)",
+      "Bash(curl -s http://localhost:3000/static/js/bundle.js)"
+    ]
+  }
+}

@@ -1,0 +1,1232 @@
+/* ============================================================
+   Kite mobile app — Zerodha clone
+   ============================================================ */
+:root {
+  --k-blue: #4184f3;
+  --k-green: #2ca01c;
+  --k-red: #e85044;
+  --k-text: #3c3c3c;
+  --k-muted: #9aa0a6;
+  --k-header: #ebedf0;
+  --k-border: #eef0f2;
+  --k-line: #f3f4f6;
+}
+
+.k-app,
+.k-app *,
+.k-app *::before,
+.k-app *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #eef0f3;
+}
+
+.k-app {
+  max-width: 460px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  color: var(--k-text);
+}
+
+@media (max-width: 480px) {
+  .k-app {
+    max-width: 100%;
+    border: none;
+  }
+}
+
+.k-up {
+  color: var(--k-green);
+}
+.k-down {
+  color: var(--k-red);
+}
+
+/* ---------- Market bar ---------- */
+.k-marketbar {
+  flex: 0 0 auto;
+  background: var(--k-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e1e3e7;
+}
+
+.k-indices {
+  display: flex;
+  gap: 38px;
+}
+
+.k-index {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.k-index-name {
+  font-size: 0.72rem;
+  letter-spacing: 0.3px;
+  color: #61666d;
+}
+
+.k-index-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.k-index-chg {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: #9aa0a6;
+}
+
+.k-mb-chevron {
+  color: #5b6068;
+}
+
+/* ---------- Screen area ---------- */
+.k-screen {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  position: relative;
+  background: #fff;
+}
+
+/* ---------- Bottom nav ---------- */
+.k-nav {
+  flex: 0 0 auto;
+  height: 62px;
+  display: flex;
+  border-top: 1px solid #eceef1;
+  background: #fff;
+}
+
+.k-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  color: #5b6068;
+  font-size: 0.7rem;
+}
+
+.k-nav-item svg {
+  font-size: 1.35rem;
+}
+
+.k-nav-item.active {
+  color: var(--k-blue);
+}
+
+/* ---------- Floating chart button ---------- */
+.k-fab {
+  position: absolute;
+  right: 16px;
+  bottom: 74px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3c3c3c;
+  cursor: pointer;
+  z-index: 6;
+}
+
+/* ---------- Shared tab strip ---------- */
+.k-tabs {
+  display: flex;
+  gap: 24px;
+  padding: 0 16px;
+  border-bottom: 1px solid #eceef1;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.k-tabs.k-tabs-center {
+  justify-content: center;
+  gap: 36px;
+}
+
+.k-tabs button {
+  border: none;
+  background: none;
+  padding: 14px 0;
+  font-size: 0.92rem;
+  color: #8a8f96;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.k-tabs button.active {
+  color: var(--k-blue);
+  border-bottom-color: var(--k-blue);
+  font-weight: 500;
+}
+
+.k-badge {
+  background: var(--k-blue);
+  color: #fff;
+  font-size: 0.66rem;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.k-tools-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #8a8f96;
+}
+.k-tools-left svg {
+  font-size: 1.3rem;
+}
+
+/* ============================================================
+   Watchlist
+   ============================================================ */
+.k-wl-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--k-header);
+  padding: 6px 12px;
+  border-bottom: 1px solid #e1e3e7;
+}
+
+.k-wl-pages {
+  display: flex;
+  gap: 2px;
+}
+
+.k-wl-pages button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: #8a8f96;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.k-wl-pages button.active {
+  color: var(--k-blue);
+  font-weight: 600;
+  border-bottom: 2px solid var(--k-blue);
+  border-radius: 0;
+}
+
+.k-wl-stack {
+  border: none;
+  background: none;
+  color: var(--k-blue);
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+}
+.k-wl-stack-plus {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.k-wl-newgroup {
+  text-align: right;
+  padding: 12px 16px 6px;
+}
+.k-wl-newgroup span {
+  color: var(--k-blue);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.k-group {
+  margin: 0 12px 16px;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.k-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--k-border);
+}
+
+.k-group-title {
+  font-size: 0.92rem;
+  color: #4b4f55;
+}
+.k-group-title small {
+  color: #9aa0a6;
+}
+
+.k-group-actions {
+  display: flex;
+  gap: 14px;
+  color: #8a8f96;
+}
+.k-group-actions svg {
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.k-wl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--k-line);
+}
+.k-wl-row:last-child {
+  border-bottom: none;
+}
+
+.k-wl-sym {
+  font-size: 0.98rem;
+  color: var(--k-text);
+}
+.k-wl-exch {
+  font-size: 0.7rem;
+  color: var(--k-muted);
+  margin-top: 4px;
+}
+.k-event {
+  color: var(--k-blue);
+  margin-left: 4px;
+}
+
+.k-wl-right {
+  text-align: right;
+}
+.k-wl-price {
+  font-size: 0.98rem;
+}
+.k-wl-chg {
+  font-size: 0.74rem;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   Orders — empty state
+   ============================================================ */
+.k-orders-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+/* Inline search bar revealed by the search icon on Orders/Portfolio/Bids */
+.k-inline-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 8px;
+  padding: 8px 12px;
+  border: 1px solid #dfe2e6;
+  border-radius: 8px;
+}
+.k-inline-search svg {
+  color: #9aa0a6;
+  font-size: 1.15rem;
+}
+.k-inline-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: var(--k-text);
+  background: transparent;
+}
+
+.k-tradebook {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--k-blue);
+  font-size: 0.88rem;
+}
+.k-tradebook svg {
+  font-size: 1.05rem;
+}
+
+.k-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 70px 24px;
+}
+.k-empty-art {
+  width: 190px;
+  height: auto;
+  margin-bottom: 26px;
+}
+.k-empty h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--k-text);
+  margin: 0 0 8px;
+}
+.k-empty p {
+  font-size: 0.9rem;
+  color: var(--k-muted);
+  margin: 0;
+}
+
+/* ============================================================
+   Portfolio
+   ============================================================ */
+.k-pf {
+  padding-bottom: 52px;
+}
+
+.k-pf-card {
+  margin: 14px 16px;
+  background: #fff;
+  border: 1px solid #eceef1;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 16px 18px;
+}
+
+.k-pf-card-top {
+  display: flex;
+  justify-content: space-between;
+}
+.k-pf-right {
+  text-align: right;
+}
+.k-pf-label {
+  font-size: 0.8rem;
+  color: var(--k-muted);
+  margin-bottom: 4px;
+}
+.k-pf-amt {
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--k-text);
+}
+.k-pf-card hr {
+  border: none;
+  border-top: 1px solid var(--k-border);
+  margin: 14px 0;
+}
+.k-pf-pnl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.k-pf-pnl-val {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+}
+.k-pill-down {
+  background: #fde8e8;
+  color: var(--k-red);
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.k-pf-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--k-border);
+}
+.k-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #dfe2e6;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 0.82rem;
+  color: #4b4f55;
+}
+.k-chip svg {
+  font-size: 1.05rem;
+}
+.k-tools-right {
+  display: flex;
+  gap: 16px;
+}
+.k-link-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--k-blue);
+  font-size: 0.82rem;
+}
+.k-link-icon svg {
+  font-size: 1.05rem;
+}
+
+.k-holding {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--k-line);
+}
+.k-holding-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.k-holding-line:last-child {
+  margin-bottom: 0;
+}
+.k-holding-meta {
+  font-size: 0.8rem;
+  color: var(--k-muted);
+}
+.k-holding-meta strong {
+  color: #4b4f55;
+  font-weight: 600;
+}
+.k-holding-sym {
+  font-size: 1rem;
+  color: var(--k-text);
+}
+.k-holding-pnl {
+  font-size: 1rem;
+}
+.k-holding-sub {
+  font-size: 0.78rem;
+  color: var(--k-muted);
+}
+
+.k-auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  color: var(--k-blue);
+  font-size: 0.9rem;
+}
+.k-auth svg {
+  font-size: 1.05rem;
+}
+
+.k-days-pl {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  border-top: 1px solid var(--k-border);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   Bids / IPO
+   ============================================================ */
+.k-bids-tabs {
+  display: flex;
+  gap: 26px;
+  padding: 0 16px;
+  background: var(--k-header);
+  border-bottom: 1px solid #e1e3e7;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.k-bids-tabs::-webkit-scrollbar {
+  display: none;
+}
+.k-bids-tabs button {
+  border: none;
+  background: none;
+  padding: 12px 0;
+  font-size: 0.92rem;
+  color: #6b7077;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.k-bids-tabs button.active {
+  color: var(--k-blue);
+  border-bottom-color: var(--k-blue);
+  font-weight: 500;
+}
+.k-badge-blue {
+  background: var(--k-blue);
+  color: #fff;
+  font-size: 0.64rem;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.k-bids-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--k-border);
+}
+.k-subtabs {
+  display: flex;
+  gap: 6px;
+}
+.k-subtabs button {
+  border: none;
+  background: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.84rem;
+  color: #6b7077;
+  cursor: pointer;
+}
+.k-subtabs button.active {
+  background: #eef0f2;
+  color: var(--k-blue);
+  font-weight: 500;
+}
+
+.k-ipo-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--k-line);
+}
+.k-ipo-name {
+  font-size: 0.8rem;
+  color: var(--k-muted);
+  margin-bottom: 5px;
+}
+.k-ipo-sym {
+  font-size: 1rem;
+  color: var(--k-text);
+  display: flex;
+  align-items: center;
+}
+.k-sme {
+  color: var(--k-blue);
+  font-size: 0.68rem;
+  margin-left: 8px;
+  letter-spacing: 0.3px;
+}
+.k-ipo-price {
+  font-size: 0.85rem;
+  color: var(--k-text);
+  margin-top: 6px;
+}
+
+.k-ipo-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.k-ipo-date {
+  font-size: 0.82rem;
+  color: #61666d;
+}
+.k-apply {
+  background: var(--k-blue);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 22px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.k-closed {
+  background: #eceef1;
+  color: #8a8f96;
+  font-size: 0.74rem;
+  padding: 6px 12px;
+  border-radius: 3px;
+  letter-spacing: 0.4px;
+}
+
+/* ============================================================
+   Profile
+   ============================================================ */
+.k-prof-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--k-header);
+  padding: 14px 16px;
+  border-bottom: 1px solid #e1e3e7;
+}
+.k-prof-name {
+  font-size: 1.1rem;
+  color: var(--k-text);
+}
+.k-prof-bell {
+  color: #5b6068;
+}
+
+.k-prof-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 17px 16px;
+  border-bottom: 1px solid var(--k-border);
+  font-size: 0.95rem;
+  color: var(--k-text);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: left;
+}
+.k-prof-row svg {
+  color: #8a8f96;
+  font-size: 1.25rem;
+}
+
+.k-logout {
+  cursor: pointer;
+}
+
+.k-prof-section {
+  border-top: 8px solid #f5f6f8;
+}
+.k-prof-section:first-of-type {
+  border-top: none;
+}
+.k-prof-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--k-text);
+}
+.k-console-logo {
+  color: var(--k-blue);
+}
+
+.k-console-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 22px;
+  padding: 4px 16px 18px;
+}
+.k-console-links a,
+.k-console-links button {
+  color: var(--k-blue);
+  text-decoration: none;
+  font-size: 0.92rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+.k-console-links button:hover {
+  text-decoration: underline;
+}
+
+/* Profile rows as buttons */
+.k-prof-row {
+  cursor: pointer;
+}
+.k-prof-row:hover {
+  background: #fafbfc;
+}
+
+/* ---------- Market bar expand panel ---------- */
+.k-marketbar-wrap {
+  flex: 0 0 auto;
+}
+.k-marketbar {
+  cursor: pointer;
+}
+.k-marketbar-wrap.open .k-mb-chevron {
+  transform: rotate(180deg);
+}
+.k-mb-chevron {
+  transition: transform 0.2s ease;
+}
+.k-mb-panel {
+  background: #fff;
+  border-bottom: 1px solid #e1e3e7;
+  padding: 4px 16px 8px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+.k-mb-panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--k-line);
+}
+.k-mb-panel-row:last-child {
+  border-bottom: none;
+}
+.k-mb-panel-name {
+  font-size: 0.8rem;
+  color: #61666d;
+}
+.k-mb-panel-vals {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.k-prof-version {
+  padding: 18px 16px 28px;
+  color: #b0b4ba;
+  font-size: 0.82rem;
+}
+
+/* ============================================================
+   Watchlist — search + add + row actions
+   ============================================================ */
+.k-wl-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--k-border);
+}
+.k-wl-search svg {
+  color: #9aa0a6;
+  font-size: 1.2rem;
+}
+.k-wl-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  color: var(--k-text);
+  background: transparent;
+}
+.k-wl-search-clear {
+  cursor: pointer;
+}
+.k-wl-count {
+  font-size: 0.78rem;
+  color: #b0b4ba;
+  white-space: nowrap;
+}
+
+.k-wl-results {
+  border-bottom: 1px solid var(--k-border);
+}
+.k-wl-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--k-line);
+  cursor: pointer;
+}
+.k-wl-result:last-child {
+  border-bottom: none;
+}
+.k-wl-result:hover {
+  background: #fafbfc;
+}
+.k-wl-result-sym {
+  font-size: 0.95rem;
+  color: var(--k-text);
+}
+.k-wl-result-exch {
+  font-size: 0.72rem;
+  color: var(--k-muted);
+  margin-left: 8px;
+}
+.k-wl-result-add {
+  font-size: 0.82rem;
+  color: var(--k-blue);
+  font-weight: 500;
+}
+.k-wl-result-add.added {
+  color: var(--k-green);
+}
+
+.k-wl-emptylist {
+  padding: 22px 16px;
+  text-align: center;
+  color: var(--k-muted);
+  font-size: 0.85rem;
+}
+
+.k-wl-item {
+  border-bottom: 1px solid var(--k-line);
+}
+.k-wl-item:last-child {
+  border-bottom: none;
+}
+.k-wl-item .k-wl-row {
+  border-bottom: none;
+  cursor: pointer;
+}
+.k-wl-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px 12px;
+}
+.k-act {
+  height: 30px;
+  min-width: 36px;
+  border-radius: 4px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.k-act.buy {
+  background: var(--k-blue);
+  color: #fff;
+}
+.k-act.sell {
+  background: var(--k-red);
+  color: #fff;
+}
+.k-act.ghost {
+  background: #f1f3f5;
+  color: #5b6068;
+}
+.k-act.ghost svg {
+  font-size: 1.1rem;
+}
+
+/* ============================================================
+   Orders — order rows
+   ============================================================ */
+.k-order-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--k-line);
+}
+.k-order-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.k-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.4px;
+}
+.k-tag.buy {
+  background: #e8f0fe;
+  color: var(--k-blue);
+}
+.k-tag.sell {
+  background: #fdeceb;
+  color: var(--k-red);
+}
+.k-order-sym {
+  font-size: 0.96rem;
+  color: var(--k-text);
+}
+.k-order-sub {
+  font-size: 0.74rem;
+  color: var(--k-muted);
+  margin-top: 3px;
+}
+.k-order-right {
+  text-align: right;
+}
+.k-order-price {
+  font-size: 0.95rem;
+  color: var(--k-text);
+}
+.k-order-status {
+  font-size: 0.64rem;
+  color: var(--k-green);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  margin-top: 3px;
+}
+
+/* ============================================================
+   Portfolio extras
+   ============================================================ */
+.k-pill-up {
+  background: #e7f7ec;
+  color: var(--k-green);
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.k-holding {
+  cursor: pointer;
+}
+
+/* ============================================================
+   Bids — applied / upcoming states
+   ============================================================ */
+.k-applied {
+  background: #e7f7ec;
+  color: var(--k-green);
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 4px;
+}
+.k-closed.upcoming {
+  background: #eef4ff;
+  color: var(--k-blue);
+}
+
+/* ============================================================
+   Order pad (bottom sheet)
+   ============================================================ */
+.k-pad-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.k-pad {
+  width: 100%;
+  max-width: 460px;
+  background: #fff;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  overflow: hidden;
+  animation: k-pad-up 0.2s ease;
+}
+@keyframes k-pad-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.k-pad-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  color: #fff;
+}
+.k-pad-head.buy {
+  background: var(--k-blue);
+}
+.k-pad-head.sell {
+  background: var(--k-red);
+}
+.k-pad-sym {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.k-pad-exch {
+  font-size: 0.74rem;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+.k-pad-toggle {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.k-pad-toggle span {
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.k-pad-toggle span.on {
+  background: #fff;
+  color: var(--k-text);
+}
+.k-pad-products {
+  display: flex;
+  gap: 10px;
+  padding: 16px 18px 6px;
+}
+.k-pad-products button {
+  flex: 1;
+  border: 1px solid #dfe2e6;
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.82rem;
+  color: #5b6068;
+  cursor: pointer;
+}
+.k-pad-products button small {
+  color: #9aa0a6;
+}
+.k-pad-products button.active {
+  border-color: var(--k-blue);
+  color: var(--k-blue);
+  background: #f5f9ff;
+}
+.k-pad-products button.active small {
+  color: var(--k-blue);
+}
+.k-pad-fields {
+  display: flex;
+  gap: 14px;
+  padding: 12px 18px;
+}
+.k-pad-field {
+  flex: 1;
+}
+.k-pad-field label {
+  display: block;
+  font-size: 0.74rem;
+  color: #9aa0a6;
+  margin-bottom: 5px;
+}
+.k-pad-field input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #dfe2e6;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 1rem;
+  color: var(--k-text);
+}
+.k-pad-field input:focus {
+  outline: none;
+  border-color: var(--k-blue);
+}
+.k-pad-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px 22px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.k-pad-margin {
+  font-size: 0.8rem;
+  color: #8a8f96;
+}
+.k-pad-margin strong {
+  color: var(--k-text);
+}
+.k-pad-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+.k-pad-cancel {
+  background: #eceff3;
+  color: #5b6068;
+  border: none;
+  border-radius: 5px;
+  padding: 11px 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.k-pad-submit {
+  border: none;
+  border-radius: 5px;
+  padding: 11px 28px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+.k-pad-submit.buy {
+  background: var(--k-blue);
+}
+.k-pad-submit.sell {
+  background: var(--k-red);
+}
+.k-pad-submit:disabled {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Toast
+   ============================================================ */
+.k-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c3038;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  z-index: 1100;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  animation: k-toast-in 0.2s ease;
+  max-width: 90%;
+}
+@keyframes k-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

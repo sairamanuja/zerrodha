@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+  color: #424242;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.nav-link {
+
+  margin-left: 30px;
+
+}
+
+/* Custom styles to match the image precisely */
+
+/* Override Bootstrap's default link color for list items */
+.list-unstyled a {
+  color: #6c757d !important;
+  /* text-muted color */
+  text-decoration: none;
+  font-size: 0.9rem;
+  /* Slightly smaller than default for list items */
+}
+
+.list-unstyled a:hover {
+  color: #495057 !important;
+  /* Darker on hover */
+  text-decoration: none;
+  /* No underline on hover as per image */
+}
+
+/* Custom class for the social icons and other general muted text */
+.text-muted-custom {
+  color: #6c757d !important;
+  /* Bootstrap's text-muted color */
+  text-decoration: none;
+}
+
+.text-muted-custom:hover {
+  color: #495057 !important;
+  /* Slightly darker on hover */
+  text-decoration: none;
+}
+
+
+/* Custom class for the legal text at the bottom to ensure consistent color and smaller size */
+.text-muted-legal {
+  color: #6c757d !important;
+  /* Or a slightly darker grey if needed to match image */
+  font-size: 0.8rem;
+  /* A common size for legal disclaimers */
+  line-height: 1.5;
+  /* For better readability of long text */
+}
+
+.small-text {
+  font-size: 0.8rem;
+  /* For very small text */
+}
+
+/* Specific blue for the links within the legal text */
+.text-blue-link {
+  color: #337ab7 !important;
+  /* A common blue for links, adjust if needed */
+  text-decoration: none;
+}
+
+.text-blue-link:hover {
+  text-decoration: underline;
+}
+
+/* Ensure headings are bold as in the image */
+h5 {
+  font-weight: bold;
+}
+
+/* Flexbox for social icons to align them */
+.social-icons a {
+  display: inline-block;
+  width: 20px;
+  /* Adjust size as needed */
+  height: 20px;
+  /* Adjust size as needed */
+  text-align: center;
+  line-height: 20px;
+  font-size: 1rem;
+  /* Adjust icon size */
+  color: #6c757d;
+  /* Match muted text color */
+}
+
+.social-icons a:hover {
+  color: #495057;
+  /* Darker on hover */
+}
+
+p {
+  padding: auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+p a {
+  color: #387ed1;
+  text-decoration: none;
+}
+
+/* ============================================================
+   Zerodha theme
+   ============================================================ */
+:root {
+  --z-blue: #387ed1;
+  --z-blue-dark: #2f6cb5;
+  --z-text: #424242;
+  --z-muted: #9b9b9b;
+}
+
+h1, h2, h3, h4 {
+  color: var(--z-text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Zerodha blue everywhere Bootstrap would use its default blue */
+.btn-primary {
+  --bs-btn-bg: var(--z-blue);
+  --bs-btn-border-color: var(--z-blue);
+  --bs-btn-hover-bg: var(--z-blue-dark);
+  --bs-btn-hover-border-color: var(--z-blue-dark);
+  --bs-btn-active-bg: var(--z-blue-dark);
+  --bs-btn-active-border-color: var(--z-blue-dark);
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: var(--z-blue-dark);
+  border-color: var(--z-blue-dark);
+}
+
+.text-primary {
+  color: var(--z-blue) !important;
+}
+
+a.text-primary:hover,
+.link-primary:hover {
+  color: var(--z-blue-dark) !important;
+}
+
+/* Inline "link →" arrows used across the marketing pages */
+.fa-arrow-right {
+  font-size: 0.85em;
+  transition: transform 0.15s ease;
+}
+
+a:hover .fa-arrow-right {
+  transform: translateX(3px);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.navbar .nav-link {
+  margin-left: 28px;
+  color: #424242;
+  font-size: 0.95rem;
+  transition: color 0.15s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--z-blue);
+}
+
+/* ---------- Section rhythm ---------- */
+.landing-hero h1,
+.container h1 {
+  letter-spacing: -0.02em;
+}
+
+/* Responsive primary CTA used on Hero / OpenAccount */
+.cta-btn {
+  display: inline-block;
+  min-width: 200px;
+}
+
+@media (max-width: 576px) {
+  .cta-btn {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Keep the navbar brand logo a sensible fixed size across breakpoints */
+.navbar-brand img {
+  width: 150px !important;
+  margin-left: 0 !important;
+}
+
+/* ---------- Brokerage / charges table ---------- */
+.brokerage-table table {
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.brokerage-table thead th {
+  background: #fbfbfd;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #eef0f2;
+}
+
+.brokerage-table td {
+  font-size: 0.95rem;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.charge-card {
+  border: 1px solid #eef0f2;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fff;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.charge-card:hover {
+  border-color: #dfe3e8;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.charge-card h5 {
+  color: var(--z-blue);
+  font-size: 1rem;
+}
+
+.charge-card p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ---------- Support: create-a-ticket form ---------- */
+.ticket-form-card {
+  border: 1px solid #eef0f2;
+  border-radius: 12px;
+  padding: 28px;
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+}
+
+.ticket-success {
+  border: 1px solid #d6f0de;
+  background: #f3fbf5;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+
+.ticket-success .tick {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #21ba45;
+  color: #fff;
+  font-size: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.ticket-ref {
+  font-weight: 600;
+  color: var(--z-blue);
+}
+
+/* ---------- Mobile spacing fixes for marketing sections ---------- */
+@media (max-width: 768px) {
+  .container.p-5,
+  .container.p-md-5 {
+    padding: 1.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
