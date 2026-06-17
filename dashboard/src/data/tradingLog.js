@@ -1,5 +1,5 @@
 export const accountProfile = {
-  name: "Vishnu",
+  name: "Vishnu Sai Charan",
   broker: "NSE F&O / Equity Segment",
 };
 
