@@ -1,5 +1,5 @@
 import React from "react";
-import { localHoldings, formatMoney } from "../data/tradingLog";
+import { localHoldings, formatMoney, formatSignedMoney } from "../data/tradingLog";
 
 const Holdings = () => {
   const totalInvestment = localHoldings.reduce(
@@ -44,10 +44,7 @@ const Holdings = () => {
                   <td>{formatMoney(stock.avg)}</td>
                   <td>{formatMoney(stock.price)}</td>
                   <td>{formatMoney(currValue)}</td>
-                  <td className={profClass}>
-                    {pnl >= 0 ? "+" : "-"}
-                    {formatMoney(Math.abs(pnl))}
-                  </td>
+                  <td className={profClass}>{formatSignedMoney(pnl)}</td>
                   <td className={profClass}>{stock.net}</td>
                   <td className={dayClass}>{stock.day}</td>
                 </tr>
@@ -68,8 +65,7 @@ const Holdings = () => {
         </div>
         <div className="col">
           <h5 className={totalPnl >= 0 ? "profit" : "loss"}>
-            {totalPnl >= 0 ? "+" : "-"}
-            {formatMoney(Math.abs(totalPnl))} ({totalPnlPct >= 0 ? "+" : ""}
+            {formatSignedMoney(totalPnl)} ({totalPnlPct >= 0 ? "+" : ""}
             {totalPnlPct.toFixed(2)}%)
           </h5>
           <p>P&L</p>

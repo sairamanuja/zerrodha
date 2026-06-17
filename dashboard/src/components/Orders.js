@@ -1,5 +1,5 @@
 import React from "react";
-import { localOrders, formatMoney } from "../data/tradingLog";
+import { localOrders, formatMoney, formatSignedMoney } from "../data/tradingLog";
 
 const Orders = () => {
   return (
@@ -30,11 +30,7 @@ const Orders = () => {
                   <td>{formatMoney(order.price)}</td>
                   <td>{order.mode}</td>
                   <td className={(order.realisedPnl || 0) < 0 ? "loss" : "profit"}>
-                    {order.realisedPnl === null
-                      ? "-"
-                      : `${order.realisedPnl >= 0 ? "+" : "-"}${formatMoney(
-                          Math.abs(order.realisedPnl)
-                        )}`}
+                    {order.realisedPnl === null ? "-" : formatSignedMoney(order.realisedPnl)}
                   </td>
                 </tr>
               ))}

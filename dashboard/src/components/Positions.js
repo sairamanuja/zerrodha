@@ -1,5 +1,5 @@
 import React from "react";
-import { localPositions, formatMoney } from "../data/tradingLog";
+import { localPositions, formatMoney, formatSignedMoney } from "../data/tradingLog";
 
 const Positions = () => {
   // Portfolio-wide totals
@@ -60,10 +60,7 @@ const Positions = () => {
                   <td>{stock.qty}</td>
                   <td>{formatMoney(stock.avg)}</td>
                   <td>{formatMoney(stock.price)}</td>
-                  <td className={profClass}>
-                    {pnl >= 0 ? "+" : "-"}
-                    {formatMoney(Math.abs(pnl))}
-                  </td>
+                  <td className={profClass}>{formatSignedMoney(pnl)}</td>
                   <td className={dayClass}>{stock.day}</td>
                 </tr>
               );
@@ -83,8 +80,7 @@ const Positions = () => {
         </div>
         <div className="col">
           <h5 className={totalPnl >= 0 ? "profit" : "loss"}>
-            {totalPnl >= 0 ? "+" : "-"}
-            {formatMoney(Math.abs(totalPnl))} ({pnlPercent >= 0 ? "+" : ""}
+            {formatSignedMoney(totalPnl)} ({pnlPercent >= 0 ? "+" : ""}
             {pnlPercent.toFixed(2)}%)
           </h5>
           <p>P&L</p>

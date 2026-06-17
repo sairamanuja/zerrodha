@@ -9,6 +9,7 @@ import {
   localOrders,
   tradingLog,
   formatMoney,
+  formatSignedMoney,
 } from "../data/tradingLog";
 
 const OrdersIllustration = () => (
@@ -129,19 +130,15 @@ const Orders = () => {
         <div className="k-filter-panel">
           <div className="k-till-date-card">
             <span>Till-date net P&amp;L</span>
-            <strong className="k-down">
-              -{formatMoney(Math.abs(accountSummary.netPnl))}
-            </strong>
+            <strong className="k-down">{formatSignedMoney(accountSummary.netPnl)}</strong>
             <div>
-              Realised -{formatMoney(Math.abs(accountSummary.realisedPnl))} ·
-              Unrealised -{formatMoney(Math.abs(accountSummary.unrealisedPnl))}
+              Realised {formatSignedMoney(accountSummary.realisedPnl)} ·
+              Unrealised {formatSignedMoney(accountSummary.unrealisedPnl)}
             </div>
           </div>
           <div className="k-filter-summary">
             <span>Realised loss trades</span>
-            <strong className="k-down">
-              -{formatMoney(Math.abs(realisedLoss))}
-            </strong>
+            <strong className="k-down">{formatSignedMoney(realisedLoss)}</strong>
             <small>{lossTrades.length} closed loss trades</small>
           </div>
           <div className="k-filter-chips">
@@ -194,9 +191,7 @@ const Orders = () => {
                       ? `Balance ${formatMoney(o.cashBalance)}`
                       : o.realisedPnl === null
                       ? "COMPLETE"
-                      : `P&L ${o.realisedPnl >= 0 ? "+" : "-"}${formatMoney(
-                          Math.abs(o.realisedPnl)
-                        )}`}
+                      : `P&L ${formatSignedMoney(o.realisedPnl)}`}
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import {
   accountSummary,
   localHoldings,
   formatMoney,
+  formatSignedMoney,
 } from "../data/tradingLog";
 
 const getUserName = () => {
@@ -64,8 +65,7 @@ const Summary = () => {
         <div className="summary-row">
           <div className="summary-figure">
             <h3 className={holdingsPnl >= 0 ? "profit" : "loss"}>
-              {holdingsPnl >= 0 ? "+" : "-"}
-              {formatMoney(Math.abs(holdingsPnl))}{" "}
+              {formatSignedMoney(holdingsPnl)} {" "}
               <small>
                 {holdingsPnlPct >= 0 ? "+" : ""}
                 {holdingsPnlPct.toFixed(2)}%
@@ -81,7 +81,7 @@ const Summary = () => {
               Investment <span>{formatMoney(totalInvestment)}</span>
             </p>
             <p>
-              Realised P&L <span>{formatMoney(accountSummary.realisedPnl)}</span>
+              Realised P&L <span>{formatSignedMoney(accountSummary.realisedPnl)}</span>
             </p>
           </div>
         </div>

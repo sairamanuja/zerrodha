@@ -10,6 +10,7 @@ import {
   localHoldings,
   localPositions,
   formatMoney,
+  formatSignedMoney,
 } from "../data/tradingLog";
 
 const pctOf = (str) => {
@@ -71,8 +72,7 @@ const Portfolio = () => {
           <span className="k-pf-label">P&amp;L</span>
           <span className="k-pf-pnl-val">
             <span className={pnl >= 0 ? "k-up" : "k-down"}>
-              {pnl >= 0 ? "+" : "-"}
-              {formatMoney(Math.abs(pnl))}
+              {formatSignedMoney(pnl)}
             </span>
             <span className={pnl >= 0 ? "k-pill-up" : "k-pill-down"}>
               {pnl >= 0 ? "+" : ""}
@@ -155,7 +155,7 @@ const Portfolio = () => {
                   Qty. <strong>{h.qty}</strong> &nbsp;•&nbsp; Avg.{" "}
                   <strong>{formatMoney(h.avg)}</strong>
                 </span>
-                <span className={up ? "k-up" : "k-down"}>
+                  <span className={up ? "k-up" : "k-down"}>
                   {up ? "+" : ""}
                   {rowPct.toFixed(2)}%
                 </span>
@@ -163,8 +163,7 @@ const Portfolio = () => {
               <div className="k-holding-line">
                 <span className="k-holding-sym">{h.name}</span>
                 <span className={`k-holding-pnl ${up ? "k-up" : "k-down"}`}>
-                  {up ? "+" : "-"}
-                  {formatMoney(Math.abs(rowPnl))}
+                  {formatSignedMoney(rowPnl)}
                 </span>
               </div>
               <div className="k-holding-line">
@@ -185,8 +184,7 @@ const Portfolio = () => {
       <div className="k-days-pl">
         <span>Day's P&amp;L</span>
         <span className={dayPnl >= 0 ? "k-up" : "k-down"}>
-          {dayPnl >= 0 ? "+" : ""}
-          {formatMoney(Math.abs(dayPnl))} {dayPct >= 0 ? "+" : ""}
+          {formatSignedMoney(dayPnl)} {dayPct >= 0 ? "+" : ""}
           {dayPct.toFixed(2)} %
         </span>
       </div>
