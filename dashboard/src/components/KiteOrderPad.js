@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { findInstrument } from "./kiteData";
-
-const API_URL = "http://localhost:8080";
 
 const KiteOrderPad = ({ pad, onClose, showToast, onPlaced }) => {
   const inst = findInstrument(pad.uid);
@@ -18,20 +15,9 @@ const KiteOrderPad = ({ pad, onClose, showToast, onPlaced }) => {
   const place = async () => {
     if (Number(qty) <= 0) return;
     setPlacing(true);
-    try {
-      await axios.post(`${API_URL}/newOrder`, {
-        name: pad.uid,
-        qty: Number(qty),
-        price: Number(price),
-        mode: pad.mode,
-      });
-      onPlaced();
-      showToast(`${isBuy ? "Buy" : "Sell"} order placed · ${pad.uid}`);
-      onClose();
-    } catch (err) {
-      showToast("Order failed — is the backend running?");
-      setPlacing(false);
-    }
+    onPlaced();
+    showToast(`${isBuy ? "Buy" : "Sell"} order simulated · ${pad.uid}`);
+    onClose();
   };
 
   return (

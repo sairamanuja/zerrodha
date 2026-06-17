@@ -1,12 +1,15 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { KiteContext } from "./KiteContext";
-
-const API_URL = "http://localhost:8080";
+import {
+  accountSummary,
+  localOrders,
+  tradingLog,
+  formatMoney,
+} from "../data/tradingLog";
 
 const OrdersIllustration = () => (
   <svg className="k-empty-art" viewBox="0 0 220 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,37 +37,40 @@ const OrdersIllustration = () => (
 );
 
 const tabs = ["Open", "Executed", "GTT", "Baskets", "SIPs"];
+const filters = [
+  { key: "history", label: "Full history" },
+  { key: "all", label: "All" },
+  { key: "losses", label: "Losses" },
+  { key: "profits", label: "Profits" },
+  { key: "openBuys", label: "Open buys" },
+];
 
 const Orders = () => {
-  const { ordersVersion, showToast } = useContext(KiteContext);
+  const { showToast } = useContext(KiteContext);
   const [tab, setTab] = useState("Executed");
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(true);
+  const [filter, setFilter] = useState("history");
   const [q, setQ] = useState("");
 
-  const fetchOrders = useCallback(() => {
-    setLoading(true);
-    axios
-      .get(`${API_URL}/allOrders`)
-      .then((res) => {
-        setOrders(Array.isArray(res.data) ? res.data : []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setOrders([]);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders, ordersVersion]);
-
   // All placed orders are treated as executed (market orders).
-  const executed = orders.filter((o) =>
-    (o.name || "").toUpperCase().includes(q.trim().toUpperCase())
+  const realisedLoss = localOrders.reduce(
+    (sum, o) => sum + Math.min(Number(o.realisedPnl || 0), 0),
+    0
   );
+  const rows = filter === "history" ? tradingLog : localOrders;
+  const lossTrades = localOrders.filter((o) => Number(o.realisedPnl || 0) < 0);
+  const executed = rows
+    .filter((o) => {
+      if (filter === "history") return true;
+      if (filter === "losses") return Number(o.realisedPnl || 0) < 0;
+      if (filter === "profits") return Number(o.realisedPnl || 0) > 0;
+      if (filter === "openBuys") return o.mode === "BUY";
+      return true;
+    })
+    .filter((o) =>
+      (o.name || "").toUpperCase().includes(q.trim().toUpperCase())
+    );
   const showList = tab === "Executed" && executed.length > 0;
 
   return (
@@ -92,9 +98,12 @@ const Orders = () => {
           />
           <TuneIcon
             style={{ cursor: "pointer" }}
-            onClick={() => showToast("Filter orders")}
+            onClick={() => setFiltersOpen((v) => !v)}
           />
-          <RefreshIcon onClick={fetchOrders} style={{ cursor: "pointer" }} />
+          <RefreshIcon
+            onClick={() => showToast("Tradebook is loaded from local CSV data")}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <div
           className="k-tradebook"
@@ -116,36 +125,83 @@ const Orders = () => {
         </div>
       )}
 
+      {filtersOpen && (
+        <div className="k-filter-panel">
+          <div className="k-till-date-card">
+            <span>Till-date net P&amp;L</span>
+            <strong className="k-down">
+              -{formatMoney(Math.abs(accountSummary.netPnl))}
+            </strong>
+            <div>
+              Realised -{formatMoney(Math.abs(accountSummary.realisedPnl))} ·
+              Unrealised -{formatMoney(Math.abs(accountSummary.unrealisedPnl))}
+            </div>
+          </div>
+          <div className="k-filter-summary">
+            <span>Realised loss trades</span>
+            <strong className="k-down">
+              -{formatMoney(Math.abs(realisedLoss))}
+            </strong>
+            <small>{lossTrades.length} closed loss trades</small>
+          </div>
+          <div className="k-filter-chips">
+            {filters.map((item) => (
+              <button
+                key={item.key}
+                className={filter === item.key ? "active" : ""}
+                onClick={() => setFilter(item.key)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {showList ? (
         <div className="k-order-list">
           {executed.map((o, i) => {
-            const buy = (o.mode || "").toUpperCase() === "BUY";
+            const action = (o.mode || o.action || "").toUpperCase();
+            const isDeposit = action === "DEPOSIT";
+            const buy = action === "BUY";
             return (
               <div className="k-order-row" key={o._id || i}>
                 <div className="k-order-left">
-                  <span className={`k-tag ${buy ? "buy" : "sell"}`}>
-                    {buy ? "BUY" : "SELL"}
+                  <span
+                    className={`k-tag ${
+                      isDeposit ? "deposit" : buy ? "buy" : "sell"
+                    }`}
+                  >
+                    {isDeposit ? "FUNDS" : buy ? "BUY" : "SELL"}
                   </span>
                   <div>
                     <div className="k-order-sym">{o.name}</div>
                     <div className="k-order-sub">
-                      Qty {o.qty} · NSE · {buy ? "Buy" : "Sell"}
+                      {o.date}
+                      {o.qty ? ` · Qty ${o.qty}` : ""} ·{" "}
+                      {isDeposit ? "Deposit" : `NSE · ${buy ? "Buy" : "Sell"}`}
                     </div>
                   </div>
                 </div>
                 <div className="k-order-right">
                   <div className="k-order-price">
-                    {Number(o.price).toFixed(2)}
+                    {isDeposit
+                      ? formatMoney(o.tradeValue)
+                      : formatMoney(o.price)}
                   </div>
-                  <div className="k-order-status">COMPLETE</div>
+                  <div className="k-order-status">
+                    {isDeposit
+                      ? `Balance ${formatMoney(o.cashBalance)}`
+                      : o.realisedPnl === null
+                      ? "COMPLETE"
+                      : `P&L ${o.realisedPnl >= 0 ? "+" : "-"}${formatMoney(
+                          Math.abs(o.realisedPnl)
+                        )}`}
+                  </div>
                 </div>
               </div>
             );
           })}
-        </div>
-      ) : loading && tab === "Executed" ? (
-        <div className="k-empty">
-          <p>Loading orders…</p>
         </div>
       ) : (
         <div className="k-empty">

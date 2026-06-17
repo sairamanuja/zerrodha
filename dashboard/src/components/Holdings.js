@@ -1,76 +1,77 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-// import { holdings } from "../data/data";
+import React from "react";
+import { localHoldings, formatMoney } from "../data/tradingLog";
 
 const Holdings = () => {
-  const [allHoldings, setAllHoldings] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:8080/allHoldings')
-      .then(res => {
-        // console.log('Fetched holdings:', res.data);
-        setAllHoldings(res.data);
-      })
-      .catch(err => {
-        console.error('Error fetching holdings:', err);
-        setAllHoldings([]);
-      })
-  }, []);
+  const totalInvestment = localHoldings.reduce(
+    (sum, stock) => sum + stock.avg * stock.qty,
+    0
+  );
+  const currentValue = localHoldings.reduce(
+    (sum, stock) => sum + stock.price * stock.qty,
+    0
+  );
+  const totalPnl = currentValue - totalInvestment;
+  const totalPnlPct = totalInvestment ? (totalPnl / totalInvestment) * 100 : 0;
 
   return (
     <>
-      <h3 className="title">Holdings ({allHoldings.length})</h3>
+      <h3 className="title">Holdings ({localHoldings.length})</h3>
 
       <div className="order-table">
         <table>
-          <tr>
-            <th>Instrument</th>
-            <th>Qty.</th>
-            <th>Avg. cost</th>
-            <th>LTP</th>
-            <th>Cur. val</th>
-            <th>P&L</th>
-            <th>Net chg.</th>
-            <th>Day chg.</th>
-          </tr>
-          {allHoldings.map((stock, index) => {
-            const currValue = stock.price * stock.qty;
-            const isProfit = currValue - stock.avg * stock.qty > 0.0;
-            const profClass = isProfit ? "profit" : "loss";
-            const dayClass = stock.isLoss ? "loss" : "profit";
-            return (
-              <tr key={index}>
-                <td>{stock.name}</td>
-                <td>{stock.qty}</td>
-                <td>{stock.avg.toFixed(2)}</td>
-                <td>{stock.price.toFixed(2)}</td>
-                <td>{currValue.toFixed(2)}</td>
-                <td className={profClass}>{(currValue - stock.avg * stock.qty).toFixed(2)}</td>
-                <td className={profClass}>{stock.net}</td>
-                <td className={dayClass}>{stock.day}</td>
-              </tr>
-            )
-          }
-          )}
+          <thead>
+            <tr>
+              <th>Instrument</th>
+              <th>Qty.</th>
+              <th>Avg. cost</th>
+              <th>LTP</th>
+              <th>Cur. val</th>
+              <th>P&L</th>
+              <th>Net chg.</th>
+              <th>Day chg.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {localHoldings.map((stock, index) => {
+              const currValue = stock.price * stock.qty;
+              const pnl = currValue - stock.avg * stock.qty;
+              const profClass = pnl >= 0 ? "profit" : "loss";
+              const dayClass = stock.isLoss ? "loss" : "profit";
+              return (
+                <tr key={index}>
+                  <td>{stock.name}</td>
+                  <td>{stock.qty}</td>
+                  <td>{formatMoney(stock.avg)}</td>
+                  <td>{formatMoney(stock.price)}</td>
+                  <td>{formatMoney(currValue)}</td>
+                  <td className={profClass}>
+                    {pnl >= 0 ? "+" : "-"}
+                    {formatMoney(Math.abs(pnl))}
+                  </td>
+                  <td className={profClass}>{stock.net}</td>
+                  <td className={dayClass}>{stock.day}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
 
       <div className="row">
         <div className="col">
-          <h5>
-            29,875.<span>55</span>{" "}
-          </h5>
+          <h5>{formatMoney(totalInvestment)}</h5>
           <p>Total investment</p>
         </div>
         <div className="col">
-          <h5>
-            31,428.<span>95</span>{" "}
-          </h5>
+          <h5>{formatMoney(currentValue)}</h5>
           <p>Current value</p>
         </div>
         <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+          <h5 className={totalPnl >= 0 ? "profit" : "loss"}>
+            {totalPnl >= 0 ? "+" : "-"}
+            {formatMoney(Math.abs(totalPnl))} ({totalPnlPct >= 0 ? "+" : ""}
+            {totalPnlPct.toFixed(2)}%)
+          </h5>
           <p>P&L</p>
         </div>
       </div>

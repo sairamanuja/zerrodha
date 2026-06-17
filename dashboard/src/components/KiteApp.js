@@ -15,6 +15,8 @@ import Bids from "./KiteBids";
 import Profile from "./KiteProfile";
 import { getUser } from "./kiteUser";
 import { KiteProvider, KiteContext } from "./KiteContext";
+import Login from "./Login";
+import { isSignedIn } from "../auth";
 import "./kite.css";
 
 const moreIndices = [
@@ -103,6 +105,12 @@ const BottomNav = ({ clientId }) => {
 };
 
 const KiteApp = () => {
+  const [signedIn, setSignedIn] = useState(isSignedIn);
+
+  if (!signedIn) {
+    return <Login onLogin={() => setSignedIn(true)} />;
+  }
+
   const { clientId } = getUser();
   return (
     <KiteProvider>
@@ -116,9 +124,9 @@ const KiteApp = () => {
             <Route path="/positions" element={<Portfolio />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/bids" element={<Bids />} />
-            <Route path="/funds" element={<Profile />} />
-            <Route path="/apps" element={<Profile />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/funds" element={<Profile onLogout={() => setSignedIn(false)} />} />
+            <Route path="/apps" element={<Profile onLogout={() => setSignedIn(false)} />} />
+            <Route path="/profile" element={<Profile onLogout={() => setSignedIn(false)} />} />
           </Routes>
         </div>
         <Fab />

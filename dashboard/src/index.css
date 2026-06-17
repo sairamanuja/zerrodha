@@ -1164,6 +1164,10 @@ hr {
   color: rgb(72, 194, 55);
 }
 
+.summary-figure h3.loss {
+  color: rgb(223, 76, 76);
+}
+
 .summary-figure h3 small {
   font-size: 0.95rem;
   font-weight: 400;
@@ -1699,6 +1703,5 @@ hr {
     font-size: 2rem;
   }
 }
-
 
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -7,8 +6,11 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import { KiteContext } from "./KiteContext";
-
-const API_URL = "http://localhost:8080";
+import {
+  localHoldings,
+  localPositions,
+  formatMoney,
+} from "../data/tradingLog";
 
 const pctOf = (str) => {
   const n = parseFloat(String(str).replace(/[^0-9.-]/g, ""));
@@ -16,31 +18,12 @@ const pctOf = (str) => {
 };
 
 const Portfolio = () => {
-  const { ordersVersion, openOrder, showToast } = useContext(KiteContext);
+  const { openOrder, showToast } = useContext(KiteContext);
   const [tab, setTab] = useState("Holdings");
-  const [holdings, setHoldings] = useState([]);
-  const [positions, setPositions] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [searchOpen, setSearchOpen] = useState(false);
   const [q, setQ] = useState("");
 
-  useEffect(() => {
-    let alive = true;
-    Promise.all([
-      axios.get(`${API_URL}/allHoldings`).then((r) => r.data).catch(() => []),
-      axios.get(`${API_URL}/allPositions`).then((r) => r.data).catch(() => []),
-    ]).then(([h, p]) => {
-      if (!alive) return;
-      setHoldings(Array.isArray(h) ? h : []);
-      setPositions(Array.isArray(p) ? p : []);
-      setLoading(false);
-    });
-    return () => {
-      alive = false;
-    };
-  }, [ordersVersion]);
-
-  const rows = tab === "Holdings" ? holdings : positions;
+  const rows = tab === "Holdings" ? localHoldings : localPositions;
   const displayRows = rows.filter((r) =>
     (r.name || "").toUpperCase().includes(q.trim().toUpperCase())
   );
@@ -62,13 +45,13 @@ const Portfolio = () => {
           className={tab === "Holdings" ? "active" : ""}
           onClick={() => setTab("Holdings")}
         >
-          Holdings <span className="k-badge">{holdings.length}</span>
+          Holdings <span className="k-badge">{localHoldings.length}</span>
         </button>
         <button
           className={tab === "Positions" ? "active" : ""}
           onClick={() => setTab("Positions")}
         >
-          Positions <span className="k-badge">{positions.length}</span>
+          Positions <span className="k-badge">{localPositions.length}</span>
         </button>
       </div>
 
@@ -76,11 +59,11 @@ const Portfolio = () => {
         <div className="k-pf-card-top">
           <div>
             <div className="k-pf-label">Invested</div>
-            <div className="k-pf-amt">{invested.toFixed(2)}</div>
+            <div className="k-pf-amt">{formatMoney(invested)}</div>
           </div>
           <div className="k-pf-right">
             <div className="k-pf-label">Current</div>
-            <div className="k-pf-amt">{current.toFixed(2)}</div>
+            <div className="k-pf-amt">{formatMoney(current)}</div>
           </div>
         </div>
         <hr />
@@ -88,8 +71,8 @@ const Portfolio = () => {
           <span className="k-pf-label">P&amp;L</span>
           <span className="k-pf-pnl-val">
             <span className={pnl >= 0 ? "k-up" : "k-down"}>
-              {pnl >= 0 ? "+" : ""}
-              {pnl.toFixed(2)}
+              {pnl >= 0 ? "+" : "-"}
+              {formatMoney(Math.abs(pnl))}
             </span>
             <span className={pnl >= 0 ? "k-pill-up" : "k-pill-down"}>
               {pnl >= 0 ? "+" : ""}
@@ -145,11 +128,7 @@ const Portfolio = () => {
         </div>
       )}
 
-      {loading ? (
-        <div className="k-empty">
-          <p>Loading…</p>
-        </div>
-      ) : displayRows.length === 0 ? (
+      {displayRows.length === 0 ? (
         <div className="k-empty">
           <h3>{rows.length === 0 ? `No ${tab.toLowerCase()}` : "No matches"}</h3>
           <p>
@@ -174,7 +153,7 @@ const Portfolio = () => {
               <div className="k-holding-line">
                 <span className="k-holding-meta">
                   Qty. <strong>{h.qty}</strong> &nbsp;•&nbsp; Avg.{" "}
-                  <strong>{h.avg.toFixed(2)}</strong>
+                  <strong>{formatMoney(h.avg)}</strong>
                 </span>
                 <span className={up ? "k-up" : "k-down"}>
                   {up ? "+" : ""}
@@ -184,14 +163,14 @@ const Portfolio = () => {
               <div className="k-holding-line">
                 <span className="k-holding-sym">{h.name}</span>
                 <span className={`k-holding-pnl ${up ? "k-up" : "k-down"}`}>
-                  {up ? "+" : ""}
-                  {rowPnl.toFixed(2)}
+                  {up ? "+" : "-"}
+                  {formatMoney(Math.abs(rowPnl))}
                 </span>
               </div>
               <div className="k-holding-line">
-                <span className="k-holding-sub">Invested {invRow.toFixed(2)}</span>
+                <span className="k-holding-sub">Invested {formatMoney(invRow)}</span>
                 <span className="k-holding-sub">
-                  LTP {h.price.toFixed(2)} ({h.day})
+                  LTP {formatMoney(h.price)} ({h.day})
                 </span>
               </div>
             </div>
@@ -207,7 +186,7 @@ const Portfolio = () => {
         <span>Day's P&amp;L</span>
         <span className={dayPnl >= 0 ? "k-up" : "k-down"}>
           {dayPnl >= 0 ? "+" : ""}
-          {dayPnl.toFixed(2)} {dayPct >= 0 ? "+" : ""}
+          {formatMoney(Math.abs(dayPnl))} {dayPct >= 0 ? "+" : ""}
           {dayPct.toFixed(2)} %
         </span>
       </div>

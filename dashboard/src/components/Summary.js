@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  accountProfile,
+  accountSummary,
+  localHoldings,
+  formatMoney,
+} from "../data/tradingLog";
 
 const getUserName = () => {
   try {
@@ -7,11 +13,24 @@ const getUserName = () => {
   } catch (_) {
     /* ignore */
   }
-  return "User";
+  return accountProfile.name;
 };
 
 const Summary = () => {
   const name = getUserName();
+  const totalInvestment = localHoldings.reduce(
+    (sum, stock) => sum + stock.avg * stock.qty,
+    0
+  );
+  const currentValue = localHoldings.reduce(
+    (sum, stock) => sum + stock.price * stock.qty,
+    0
+  );
+  const holdingsPnl = currentValue - totalInvestment;
+  const holdingsPnlPct = totalInvestment
+    ? (holdingsPnl / totalInvestment) * 100
+    : 0;
+  const marginAvailable = accountSummary.currentHoldingsValue;
 
   return (
     <div className="summary-page">
@@ -23,15 +42,15 @@ const Summary = () => {
         <p className="summary-label">Equity</p>
         <div className="summary-row">
           <div className="summary-figure">
-            <h3>3.74k</h3>
+            <h3>{formatMoney(marginAvailable)}</h3>
             <span>Margin available</span>
           </div>
           <div className="summary-meta">
             <p>
-              Margins used <span>0</span>
+              Own capital <span>{formatMoney(accountSummary.ownCapitalDeposited)}</span>
             </p>
             <p>
-              Opening balance <span>3.74k</span>
+              Borrowed <span>{formatMoney(accountSummary.borrowedLoanOutstanding)}</span>
             </p>
           </div>
         </div>
@@ -41,20 +60,28 @@ const Summary = () => {
 
       {/* Holdings */}
       <div className="summary-block">
-        <p className="summary-label">Holdings (13)</p>
+        <p className="summary-label">Holdings ({localHoldings.length})</p>
         <div className="summary-row">
           <div className="summary-figure">
-            <h3 className="profit">
-              1.55k <small>+5.20%</small>
+            <h3 className={holdingsPnl >= 0 ? "profit" : "loss"}>
+              {holdingsPnl >= 0 ? "+" : "-"}
+              {formatMoney(Math.abs(holdingsPnl))}{" "}
+              <small>
+                {holdingsPnlPct >= 0 ? "+" : ""}
+                {holdingsPnlPct.toFixed(2)}%
+              </small>
             </h3>
             <span>P&L</span>
           </div>
           <div className="summary-meta">
             <p>
-              Current Value <span>31.43k</span>
+              Current Value <span>{formatMoney(currentValue)}</span>
             </p>
             <p>
-              Investment <span>29.88k</span>
+              Investment <span>{formatMoney(totalInvestment)}</span>
+            </p>
+            <p>
+              Realised P&L <span>{formatMoney(accountSummary.realisedPnl)}</span>
             </p>
           </div>
         </div>

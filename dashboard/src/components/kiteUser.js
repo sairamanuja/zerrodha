@@ -1,14 +1,10 @@
-// Resolves the signed-in user (from signup) for the Kite mobile UI.
-const DEFAULT_NAME = "Rachakonda Manish Rao";
+import { accountProfile } from "../data/tradingLog";
+
+// Resolves the local dashboard user for the Kite mobile UI.
+const DEFAULT_NAME = accountProfile.name;
 
 export const getUser = () => {
   let name = DEFAULT_NAME;
-  try {
-    const u = JSON.parse(localStorage.getItem("zerodha_user"));
-    if (u && u.name) name = u.name;
-  } catch (_) {
-    /* ignore */
-  }
 
   const parts = name.trim().split(/\s+/);
   const initials = (
@@ -17,8 +13,8 @@ export const getUser = () => {
       : parts[0].slice(0, 2)
   ).toUpperCase();
 
-  // Default account keeps the sample client id; real users get a derived one.
-  let clientId = "KQA199";
+  // Default account keeps a stable sample client id; real users get a derived one.
+  let clientId = "VIS142";
   if (name !== DEFAULT_NAME) {
     const base = (parts[0].slice(0, 3) || "ZER").toUpperCase().padEnd(3, "Z");
     const num = ((name.length * 7) % 900) + 100;

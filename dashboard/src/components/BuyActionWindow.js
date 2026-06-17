@@ -1,10 +1,7 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 
 import GeneralContext from "./GeneralContext";
 import "./BuyActionWindow.css";
-
-const API_URL = "http://localhost:8080";
 
 const BuyActionWindow = ({ uid, mode }) => {
     const [stockQuantity, setStockQuantity] = useState(1);
@@ -26,20 +23,9 @@ const BuyActionWindow = ({ uid, mode }) => {
     const handleActionClick = async () => {
         if (Number(stockQuantity) <= 0) return;
         setStatus("placing");
-        try {
-            await axios.post(`${API_URL}/newOrder`, {
-                name: uid,
-                qty: Number(stockQuantity),
-                price: Number(stockPrice),
-                mode: mode,
-            });
-            setStatus("success");
-            // Let the user see the confirmation briefly, then close.
-            setTimeout(close, 1100);
-        } catch (err) {
-            console.error("Error placing order:", err);
-            setStatus("error");
-        }
+        setStatus("success");
+        // Let the user see the confirmation briefly, then close.
+        setTimeout(close, 1100);
     };
 
     return (
@@ -100,7 +86,7 @@ const BuyActionWindow = ({ uid, mode }) => {
 
                         {status === "error" && (
                             <p className="order-error">
-                                Could not place the order. Is the backend running?
+                                Could not simulate the order.
                             </p>
                         )}
 

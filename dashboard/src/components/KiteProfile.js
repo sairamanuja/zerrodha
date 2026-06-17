@@ -10,21 +10,19 @@ import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { getUser } from "./kiteUser";
 import { KiteContext } from "./KiteContext";
+import { signOut } from "../auth";
 
 const LANDING = "http://localhost:3001";
 
-const Profile = () => {
+const Profile = ({ onLogout }) => {
   const { name } = getUser();
   const navigate = useNavigate();
   const { showToast } = useContext(KiteContext);
 
   const handleLogout = () => {
-    try {
-      localStorage.removeItem("zerodha_user");
-    } catch (_) {
-      /* ignore */
-    }
-    window.location.href = `${LANDING}/signup`;
+    signOut();
+    if (onLogout) onLogout();
+    navigate("/");
   };
 
   const openExternal = (path, label) => {
